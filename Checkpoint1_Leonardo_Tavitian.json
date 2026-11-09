@@ -1,0 +1,186 @@
+{
+  "name": "M1 - Agente base onboarding inversores",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "7409b6c0-b451-4ef6-8bab-121b54bdd900",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "b2c3d4e5-2222-4b02-8b02-000000000002"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "# ROL\nSos el \"Asistente de Onboarding de Inversores\" de Demo Valores, un broker ficticio creado con fines de demostración. Atendés a personas que quieren empezar a operar CEDEARs. Hablás en español rioplatense, con voseo, en un tono cordial y profesional.\n\n# ÁMBITO\nPodés ayudar con: cómo funciona operar CEDEARs (conceptos generales), aranceles y comisiones del broker, plazos de liquidación, requisitos y pasos para abrir una cuenta comitente, y horarios de atención.\nQuedan fuera de tu ámbito: recomendaciones de inversión, cotizaciones o proyecciones de precios, asesoramiento impositivo o legal y cualquier tema ajeno a la apertura y la operatoria básica.\n\n# OBJETIVO\nLograr que la persona entienda el proceso y llegue al siguiente paso concreto (completar la apertura de cuenta o hablar con un asesor humano) con información correcta. Priorizá la exactitud sobre la rapidez.\n\n# REGLAS Y ESCALAMIENTO\n1. Para aranceles, plazos, requisitos y horarios usá SIEMPRE la herramienta consultar_manual_broker, que devuelve todo el manual, y respondé solo con lo que figure ahí. Nunca respondas esos datos de memoria.\n2. Si el dato no figura en la herramienta, o la consulta trata sobre un producto o servicio de Demo Valores que no corresponde a Aranceles, Plazos, Apertura u Horarios (por ejemplo tarjetas, cuentas bancarias o préstamos), no afirmes ni niegues nada: respondé \"No sé\" y ofrecé derivar a un asesor humano.\n3. Cerrá cada respuesta con: \"Información de carácter educativo; no constituye asesoramiento de inversión.\"\n4. Derivá a un asesor humano si la persona pide una recomendación, presenta un reclamo, menciona un problema con fondos u operaciones, o la consulta no se resuelve en dos intercambios.\n5. Escribí en español estándar, sin lenguaje inclusivo alternativo.\n\nAcciones que NO podés hacer:\n- No des recomendaciones sobre qué comprar, vender o mantener, ni opines si es buen momento para invertir.\n- No prometas ni insinúes rendimientos.\n- No pidas ni repitas DNI, CUIT, CBU, claves, saldos ni tenencias; si la persona los escribe, pedile que no los comparta.\n- No inventes aranceles, plazos, requisitos ni horarios.\n- No abras cuentas ni ejecutes operaciones: solo informás y derivás.\n- Nunca afirmes qué ofrece o no ofrece Demo Valores si no surge de la herramienta.",
+          "maxIterations": 6,
+          "returnIntermediateSteps": true
+        }
+      },
+      "id": "b82addfb-c13e-45de-9787-26306c186339",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        320,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.5-flash-lite",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "id": "430eee2f-e7fa-4ef4-9f4a-c19ed0f40cf9",
+      "name": "Google Gemini Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        240,
+        240
+      ],
+      "credentials": {
+        "googlePalmApi": {
+          "id": "ZAz35bUADYbfOnnr",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Consulta la hoja \"Manual_Broker\", que contiene el manual oficial (ficticio) del broker: aranceles y comisiones, plazos de liquidación, requisitos y pasos de apertura de cuenta comitente y horarios de atención. Usala SIEMPRE que la persona pregunte cuánto cuesta operar, qué comisiones hay, cuánto tarda en liquidarse o acreditarse una operación, qué documentación o pasos necesita para abrir una cuenta, o cuándo atienden. Devuelve todas las filas del manual (columnas tema, subtema, detalle y vigencia): leé la fila que corresponda a la consulta y respondé solo con lo que figure ahí. NO la uses para saludos, para preguntas conceptuales generales (por ejemplo, qué es un CEDEAR) ni para pedidos de recomendación, que se derivan a un asesor humano. Si la búsqueda no devuelve filas, no inventes: respondé \"No sé\" y ofrecé derivar.",
+        "documentId": {
+          "__rl": true,
+          "value": "1cjiw-HgjOwqDdeg34JwrqeMRskiogggAR2gp3Pt5N6k",
+          "mode": "list",
+          "cachedResultName": "Manual_Broker",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cjiw-HgjOwqDdeg34JwrqeMRskiogggAR2gp3Pt5N6k/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2106282435,
+          "mode": "list",
+          "cachedResultName": "Manual_Broker",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cjiw-HgjOwqDdeg34JwrqeMRskiogggAR2gp3Pt5N6k/edit#gid=2106282435"
+        },
+        "filtersUI": {
+          "values": []
+        },
+        "options": {}
+      },
+      "id": "efc85fd6-8ae1-4bdc-af78-8a321d47e3b4",
+      "name": "consultar_manual_broker",
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.5,
+      "position": [
+        480,
+        240
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "PTBb6VvhgfR8PZth",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0CG074ESTV",
+          "mode": "list",
+          "cachedResultName": "revision-1"
+        },
+        "text": "=✅ Tarea completada\n*Sesión:* {{ $('When chat message received').item.json.sessionId }}\n*Consulta:* {{ $('When chat message received').item.json.chatInput }}\n*Respuesta del agente:* {{ $json.output }}\n*Herramientas usadas:* {{ $json.intermediateSteps && $json.intermediateSteps.length ? $json.intermediateSteps.map(s => s.action.tool + ' → ' + JSON.stringify(s.action.toolInput) + ' ⇒ ' + String(JSON.stringify(s.observation)).slice(0,200)).join(' | ') : 'ninguna' }}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "id": "2d62840b-239b-4ebf-8f65-8a16fed072ef",
+      "name": "Slack - Log de observabilidad",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [
+        688,
+        0
+      ],
+      "webhookId": "b2bb557a-ecec-4492-a3af-96d53ec103a0",
+      "credentials": {
+        "slackApi": {
+          "id": "KkexPkykmv2YuA8A",
+          "name": "Slack account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "consultar_manual_broker": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Slack - Log de observabilidad",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "2ac363d0-9e3c-46ce-b9ad-1295b224a4d9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "501083e8cd37199e85bf6c5c9eb0a0c422729ab89e77e06390add1924972b843"
+  },
+  "nodeGroups": [],
+  "id": "lfJHC9nR0iOopEok",
+  "tags": []
+}
