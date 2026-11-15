@@ -5,18 +5,18 @@ Pre-entrega del Módulo 4 del curso **AI Automation Avanzado**. Se consideró co
 
 > Caso: onboarding de inversores de CEDEARs de **Demo Valores**, un broker ficticio creado con fines de demostración.
 
-**Archivo a importar:** [`checkpoint4_nombre_apellido.json`](./checkpoint4_leonardo_tavitian.json)
+**Archivo a importar:** [`checkpoint4_leonardo_tavitian.json`](./checkpoint4_leonardo_tavitian.json)
 
 ## Credenciales activas en n8n
 
-![Sección Credentials de n8n con las tres conexiones activas](./img/credentials.png)
+![Sección Credentials de n8n con las tres conexiones activas](credentials.png)
 
 > Reemplazar por la captura de **Credentials** con Gmail, HubSpot y Slack en verde.
 
 | Rol | Herramienta | Tipo de credencial en n8n | Autenticación |
 |---|---|---|---|
 | Correo electrónico | Gmail | Gmail OAuth2 API | OAuth2 |
-| CRM | HubSpot | HubSpot App Token API | Service Key de HubSpot con scopes acotados |
+| CRM | HubSpot | HHubSpot Service Key | Service Key de HubSpot con scopes acotados |
 | Canal del equipo | Slack | Slack API | Token de bot (`xoxb-`) |
 
 ## Arquitectura del flujo
