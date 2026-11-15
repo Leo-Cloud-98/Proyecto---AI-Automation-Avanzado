@@ -5,7 +5,7 @@ Pre-entrega del Módulo 4 del curso **AI Automation Avanzado**. Se consideró co
 
 > Caso: onboarding de inversores de CEDEARs de **Demo Valores**, un broker ficticio creado con fines de demostración.
 
-**Archivo a importar:** [`checkpoint4_nombre_apellido.json`](./checkpoint4_nombre_apellido.json)
+**Archivo a importar:** [`checkpoint4_nombre_apellido.json`](./checkpoint4_leonardo_tavitian.json)
 
 ## Credenciales activas en n8n
 
