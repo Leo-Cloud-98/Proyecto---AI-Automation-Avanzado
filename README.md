@@ -11,8 +11,6 @@ Pre-entrega del Módulo 4 del curso **AI Automation Avanzado**. Se consideró co
 
 ![Sección Credentials de n8n con las tres conexiones activas](credentials.png)
 
-> Reemplazar por la captura de **Credentials** con Gmail, HubSpot y Slack en verde.
-
 | Rol | Herramienta | Tipo de credencial en n8n | Autenticación |
 |---|---|---|---|
 | Correo electrónico | Gmail | Gmail OAuth2 API | OAuth2 |
