@@ -14,8 +14,8 @@ Pre-entrega del Módulo 4 del curso **AI Automation Avanzado**. Se consideró co
 | Rol | Herramienta | Tipo de credencial en n8n | Autenticación |
 |---|---|---|---|
 | Correo electrónico | Gmail | Gmail OAuth2 API | OAuth2 |
-| CRM | HubSpot | HHubSpot Service Key | Service Key de HubSpot con scopes acotados |
-| Canal del equipo | Slack | Slack API | Token de bot (`xoxb-`) |
+| CRM | HubSpot | HubSpot Service Key | Service Key de HubSpot con scopes acotados |
+| Canal del equipo | Slack | Slack API | Token de bot |
 
 ## Arquitectura del flujo
 
